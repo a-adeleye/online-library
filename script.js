@@ -8,11 +8,14 @@ function Book(title, author, pages, read) {
 }
 
 //DOM Objects
-
+const bookCardsRow = document.querySelector("#bookCards");
 const addBookBtn = document.querySelector(".add-book");
 const removeBookBtn = document.querySelector(".remove-book");
 const readBookBtn = document.querySelector(".read-books");
 const unreadBookBtn = document.querySelector(".unread-books");
+
+const noBooks = document.querySelector(".noBooks");
+const statsRow = document.querySelector("#stats");
 
 const modalForm = document.querySelector(".modal-container");
 const closeBtn = document.querySelector(".close");
@@ -39,15 +42,10 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
-const clearForm = () => {
-  $title.value = "";
-  $author.value = "";
-  $pages.value = "";
-  $read.checked = false;
-};
-
-function storeData() {
-  localStorage.setItem("myLibraryBook", JSON.stringify(myLibrary));
+function setReadStatus() {
+  if ($read.checked == true) {
+    return ($read.value = true);
+  } else return ($read.value = false);
 }
 
 function addForm() {
@@ -56,6 +54,93 @@ function addForm() {
 
 function closeModal() {
   modalForm.style.display = "none";
+}
+
+const clearForm = () => {
+  $title.value = "";
+  $author.value = "";
+  $pages.value = "";
+  $read.checked = false;
+};
+
+function updateBooks() {
+  bookCardsRow.textContent = "";
+  myLibrary.forEach((book) => createCard(book));
+}
+
+function storeData() {
+  localStorage.setItem("myLibraryBook", JSON.stringify(myLibrary));
+}
+
+const populateData = () => {
+  myLibrary = JSON.parse(localStorage.getItem("myLibraryBook"));
+};
+
+function createCard(book) {
+  const card = document.createElement("div");
+  card.className = "card";
+  const title = document.createElement("h4");
+  const author = document.createElement("h5");
+  const pages = document.createElement("h5");
+  const readStatus = document.createElement("h6");
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "delete";
+  deleteBtn.setAttribute("onclick", "deleteBook()");
+  deleteBtn.textContent = "Delete";
+
+  title.textContent = book.title;
+  author.textContent = book.author;
+  pages.textContent = `${book.pages} pages`;
+  if (book.read) {
+    readStatus.textContent = "read";
+    readStatus.className = "read";
+  } else {
+    readStatus.textContent = "unread";
+    readStatus.className = "unread";
+  }
+  readStatus.setAttribute("onclick", "toggleRead()");
+  card.appendChild(title);
+  card.appendChild(author);
+  card.appendChild(pages);
+  card.appendChild(readStatus);
+  card.appendChild(deleteBtn);
+  bookCardsRow.appendChild(card);
+}
+
+function deleteBook(e) {
+  e = e || window.event;
+  let card = e.target.parentNode;
+  let index = Array.from(card.parentNode.children).indexOf(card);
+  console.log(index);
+  card.parentNode.removeChild(card);
+  myLibrary.splice([index], 1);
+  storeData();
+  updateStats();
+}
+
+function toggleRead(e) {
+  e = e || window.event;
+  let card = e.target.parentNode;
+  let index = Array.from(card.parentNode.children).indexOf(card);
+  if (card.childNodes.item(3).textContent == "unread") {
+    card.childNodes.item(3).textContent = "read";
+    card.childNodes.item(3).className = "read";
+    myLibrary[index].read = true;
+  } else {
+    card.childNodes.item(3).textContent = "unread";
+    card.childNodes.item(3).className = "unread";
+    myLibrary[index].read = false;
+  }
+  storeData();
+  updateStats();
+}
+
+function showStats() {
+  statsRow.style.display = "flex";
+}
+
+function hideNoBooks() {
+  noBooks.style.display = "none";
 }
 
 function totalBooksCount() {
@@ -92,151 +177,74 @@ function progress() {
   }
 }
 
-// Event listeners
-
-addBookBtn.addEventListener("click", addForm);
-closeBtn.addEventListener("click", closeModal);
-$read.addEventListener("click", setReadStatus);
-
-function setReadStatus() {
-  if ($read.checked == true) {
-    return ($read.value = true);
-  } else return ($read.value = false);
-}
-
-submit.addEventListener("click", function () {
-  addBookToLibrary();
-  storeData();
-  closeModal();
-  clearForm();
-  updateData();
-  updateBookCard();
-});
-
-//DOM Contents
-
-function updateData() {
-  hideStat();
+function updateStats() {
   progressStat.textContent = progress();
   totalBooks.textContent = totalBooksCount();
   totalReadBooks.textContent = totalReadCount();
   totalUnreadBooks.textContent = totalUnreadCount();
 }
 
-function updateBookCard() {
-  const index = myLibrary.length;
-  let book = myLibrary[index - 1];
-  const bookCardsRow = document.querySelector("#bookCards");
-  const card = document.createElement("div");
-  card.className = "card";
-  const title = document.createElement("h4");
-  const author = document.createElement("h5");
-  const pages = document.createElement("h5");
-  const readStatus = document.createElement("h6");
-  const deleteBtn = document.createElement("button");
-  deleteBtn.className = "delete";
-  deleteBtn.setAttribute("onclick", "deleteBook()");
-  deleteBtn.textContent = "Delete";
-  title.textContent = book.title;
-  author.textContent = book.author;
-  pages.textContent = `${book.pages} pages`;
-
-  if (book.read) {
-    readStatus.textContent = "read";
-    readStatus.className = "read";
-  } else {
-    readStatus.textContent = "unread";
-    readStatus.className = "unread";
-  }
-  readStatus.setAttribute("onclick", "toggleRead()");
-  card.appendChild(title);
-  card.appendChild(author);
-  card.appendChild(pages);
-  card.appendChild(readStatus);
-  card.appendChild(deleteBtn);
-  bookCardsRow.appendChild(card);
-}
-
-function deleteBook(e) {
-  e = e || window.event;
-  let card = e.target.parentNode;
-  let index = Array.from(card.parentNode.children).indexOf(card);
-  console.log(index);
-  card.parentNode.removeChild(card);
-  myLibrary.splice([index], 1);
-  updateData();
-}
-
-function toggleRead(e) {
-  e = e || window.event;
-  let card = e.target.parentNode;
-  let index = Array.from(card.parentNode.children).indexOf(card);
-  if (card.childNodes.item(3).textContent == "unread") {
-    card.childNodes.item(3).textContent = "read";
-    card.childNodes.item(3).className = "read";
-    myLibrary[index].read = true;
-  } else {
-    card.childNodes.item(3).textContent = "unread";
-    card.childNodes.item(3).className = "unread";
-    myLibrary[index].read = false;
-  }
-  updateData();
-}
-
-function hideStat() {
-  let noBooks = document.querySelector(".noBooks");
-  let statsRow = document.querySelector("#stats");
-  if (myLibrary.length < 1) {
-    noBooks.style.display = "block";
-    statsRow.style.display = "none";
-  } else {
-    noBooks.style.display = "none";
-    statsRow.style.display = "flex";
-  }
-}
-
 function filterRead() {
   const readBtn = document.querySelector(".readBtn");
   const unreadBtn = document.querySelector(".unreadBtn");
-  let cards = Array.from(document.getElementsByClassName("unread"));
+  let allCards = Array.from(document.getElementsByClassName("card"));
+  let unreadBookCards = Array.from(document.getElementsByClassName("unread"));
+  let readBookCards = Array.from(document.getElementsByClassName("read"));
 
-  cards.forEach(card => hide(card));
+  if (readBtn.checked == false && unreadBtn.checked == false) {
+    allCards.forEach((card) => (card.style.display = "flex"));
+  }
 
-  function hide(elem) {
+  if (readBtn.checked == true && unreadBtn.checked == true) {
+    allCards.forEach((card) => (card.style.display = "flex"));
+  }
 
-    if(readBtn.checked == true && unreadBtn.checked == true){
-      elem.parentNode.style.display = "flex";
-    } else if (readBtn.checked == true){
-      elem.parentNode.style.display = "none";
-    } else {
-      elem.parentNode.style.display = "flex";
-    }
-  } 
+  if (readBtn.checked == true && unreadBtn.checked == false) {
+    unreadBookCards.forEach((card) => (card.parentNode.style.display = "none"));
+    readBookCards.forEach((card) => (card.parentNode.style.display = "flex"));
+  }
+
+  if (readBtn.checked == false && unreadBtn.checked == true) {
+    readBookCards.forEach((card) => (card.parentNode.style.display = "none"));
+    unreadBookCards.forEach((card) => (card.parentNode.style.display = "flex"));
+  }
 }
 
-function filterUnread() {
-  const readBtn = document.querySelector(".readBtn");
-  const unreadBtn = document.querySelector(".unreadBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  addBookBtn.addEventListener("click", addForm);
 
-  let readBooks = Array.from(document.getElementsByClassName("read"));
-  let unreadBooks = Array.from(document.getElementsByClassName("unread"));
+  closeBtn.addEventListener("click", closeModal);
 
-  cards.forEach(card => hide(card));
-  
-  function hide(book) {
-    if(unreadBtn.checked == true && readBtn.checked == true){
-      readBooks.parentNode.style.display = "flex";
-      unreadBooks.parentNode.style.display = "flex";
-    } else if (readBtn.checked == true){
-      readBooks.parentNode.style.display = "flex";
-      unreadBooks.parentNode.style.display = "none";
-    } else {
-      unreadBooks.parentNode.style.display = "flex";
-      readBooks.parentNode.style.display = "none";
-    }
-  } 
-}
+  $read.addEventListener("click", setReadStatus);
+
+  readBookBtn.addEventListener("click", filterRead);
+
+  unreadBookBtn.addEventListener("click", filterRead);
+
+  submit.addEventListener("click", function () {
+    addBookToLibrary();
+    storeData();
+    updateBooks();
+    closeModal();
+    updateStats();
+    clearForm();
+  });
+
+  if (!localStorage.getItem("myLibraryBook")) {
+    storeData();
+  } else {
+    hideNoBooks();
+    showStats();
+    populateData();
+    updateBooks();
+    updateStats();
+  }
+});
+
+/*  
 
 
-readBookBtn.addEventListener('click', filterRead);
-unreadBookBtn.addEventListener('click', filterUnread);
+
+
+
+*/
