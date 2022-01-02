@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Project: Library</title>
+  </head>
+  <body>
+    <header>
+      <div class="heading">
+        <div class="logo">Online Library</div>
+        <div class="search">
+          <input type="search" />
+        </div>
+        <div class="profile">
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="navigation">
+        <div class="button add-book">
+          <i class="fas fa-plus"></i>
+          <h6>add</h6>
+        </div>
+        <div class="button read-books">
+          <input type="checkbox" class="readBtn" />
+          <h6>read</h6>
+        </div>
+        <div class="button unread-books">
+          <input type="checkbox" class="unreadBtn" />
+          <h6>unread</h6>
+        </div>
+      </div>
+    </nav>
+
+    <div class="catalogue">
+      <div class="row" id="stats">
+        <div class="stat summary">
+          <h4>Progress</h4>
+          <p id="progressStat"></p>
+        </div>
+        <div class="stat">
+          <h4>Total Books</h4>
+          <p id="totalBooks"></p>
+        </div>
+        <div class="stat">
+          <h4>Total Read</h4>
+          <p id="totalReadBooks"></p>
+        </div>
+        <div class="stat">
+          <h4>Total Unread</h4>
+          <p id="totalunReadBooks"></p>
+        </div>
+      </div>
+      <div class="row" id="bookCards"></div>
+      <p class="noBooks">
+        You currently have no books. Click on the + button to add a book.
+      </p>
+    </div>
+
+    <div class="modal-container">
+      <div class="close">X</div>
+      <form action="">
+        <input type="text" id="title" placeholder="Title" required />
+        <input type="text" id="author" placeholder="Author" required />
+        <input type="number" id="pages" placeholder="Pages" min="1" required />
+        <label for="read">Read?</label>
+        <input
+          type="checkbox"
+          name="read"
+          id="read"
+          placeholder="read"
+          value="false"
+          unchecked
+        />
+        <input type="submit" value="Submit" id="submit" />
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
