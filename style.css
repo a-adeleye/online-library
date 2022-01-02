@@ -19,6 +19,8 @@ html{
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
+    position: fixed;
+    z-index: 10;
 }
 
 .logo{
@@ -63,7 +65,7 @@ input[type='search']{
 }
 
 .navigation{
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,7 +74,7 @@ input[type='search']{
     top: 13%;
     left: 1%;
     background: #F0F5FB;
-    max-width: 10%;
+    max-width: 5%;
     height: 84%;
     justify-content: center;
     border-radius: 8px;
