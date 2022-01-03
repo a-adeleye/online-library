@@ -111,11 +111,11 @@ function deleteBook(e) {
   e = e || window.event;
   let card = e.target.parentNode;
   let index = Array.from(card.parentNode.children).indexOf(card);
-  console.log(index);
   card.parentNode.removeChild(card);
   myLibrary.splice([index], 1);
   storeData();
   updateStats();
+  toggleStats();
 }
 
 function toggleRead(e) {
@@ -133,14 +133,6 @@ function toggleRead(e) {
   }
   storeData();
   updateStats();
-}
-
-function showStats() {
-  statsRow.style.display = "flex";
-}
-
-function hideNoBooks() {
-  noBooks.style.display = "none";
 }
 
 function totalBooksCount() {
@@ -210,7 +202,18 @@ function filterRead() {
   }
 }
 
+function toggleStats(){
+  if(myLibrary.length > 0){
+    statsRow.style.display = "flex";
+    noBooks.style.display = "none";
+  } else {
+    statsRow.style.display = "none";
+  noBooks.style.display = "flex";
+}
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+
   addBookBtn.addEventListener("click", addForm);
 
   closeBtn.addEventListener("click", closeModal);
@@ -225,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addBookToLibrary();
     storeData();
     updateBooks();
+    toggleStats();
     closeModal();
     updateStats();
     clearForm();
@@ -233,12 +237,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("myLibraryBook")) {
     storeData();
   } else {
-    hideNoBooks();
-    showStats();
     populateData();
-    updateBooks();
-    updateStats();
   }
+  toggleStats();
+  updateBooks();
+  updateStats();
 });
 
 /*  
