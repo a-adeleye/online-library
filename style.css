@@ -1,267 +1,275 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-    background: #d6e4f1;
-    font-family: 'Montserrat', sans-serif;
-    color: #333;
+html {
+  background: #d6e4f1;
+  font-family: "Montserrat", sans-serif;
+  color: #333;
 }
 
-.heading{
-    width: 100%;
-    background: #F0F5FB;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    position: fixed;
-    z-index: 10;
+.heading {
+  width: 100%;
+  background: #f0f5fb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: fixed;
+  z-index: 10;
 }
 
-.logo{
-    font-weight: 700;
+.logo {
+  font-weight: 700;
 }
 
-.search{
-opacity: 1;
-border-radius: 4px;
-height: 40px;
-width: 300px;
-display: flex;
+.search {
+  opacity: 1;
+  border-radius: 4px;
+  height: 40px;
+  width: 300px;
+  display: flex;
 }
 
-input[type='search']{
-    width: 65%;
-    height: 100%;
-    border-radius: 6px;
-    border: none;
-    padding-left: 15px;
-    box-shadow: inset 1px 1px 1px #d6d5d5;
-    display: inline-block;
+input[type="search"] {
+  width: 65%;
+  height: 100%;
+  border-radius: 6px;
+  border: none;
+  padding-left: 15px;
+  box-shadow: inset 1px 1px 1px #d6d5d5;
+  display: inline-block;
 }
 
-.submit{
-    display: inline-block;
-    width: 30%;
-    padding: 10px 10px;
-    margin: 0 auto;
-    height: 100%;
-    cursor: pointer;
-    color: #012263;
+.submit {
+  display: inline-block;
+  width: 30%;
+  padding: 10px 10px;
+  margin: 0 auto;
+  height: 100%;
+  cursor: pointer;
+  color: #012263;
 }
 
-.profile{
-    display: flex;
-    gap: 10px;
+.profile {
+  display: flex;
+  gap: 10px;
 }
 
-.circle{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #C06865;
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #c06865;
 }
 
-.navigation{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 90px;
-    padding: 20px;
-    top: 13%;
-    left: 1%;
-    background: #F0F5FB;
-    max-width: 5%;
-    height: 84%;
-    justify-content: center;
-    border-radius: 8px;
-    margin-right: 10px;
+.navigation {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 90px;
+  padding: 20px;
+  top: 13%;
+  left: 1%;
+  background: #f0f5fb;
+  max-width: 5%;
+  height: 84%;
+  justify-content: center;
+  border-radius: 8px;
+  margin-right: 10px;
 }
 
-.button{
-    cursor: pointer;
-    text-align: center;
+.button {
+  cursor: pointer;
+  text-align: center;
 }
 
-i{
-    color: #012263;
-    font-size: 25px;
+i {
+  color: #012263;
+  font-size: 25px;
 }
 
-input[type='checkbox']{
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-.catalogue{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    position: absolute;
-    top: 13%;
-    left: 8%;
-    gap: 20px;
-    margin-left: 10px;
-    width: 85%;
+.catalogue {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 13%;
+  left: 8%;
+  gap: 20px;
+  margin-left: 10px;
+  width: 85%;
 }
 
-#stats{
-    display: none;
-    justify-content: space-evenly;
+#stats {
+  display: none;
+  justify-content: space-evenly;
 }
 
-.noBooks{
-    font-size: 20px;
-    margin-left: 40px;
-    margin-top: 30px;
-    font-weight: bold;
+.noBooks {
+  font-size: 20px;
+  margin-left: 40px;
+  margin-top: 30px;
+  font-weight: bold;
 }
 
-.row{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+.row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.stat{
-    width: 180px;
-    height: 70px;
-    background: #F0F5FB;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 3px 10px 3px 20px;
+.stat {
+  width: 180px;
+  height: 70px;
+  background: #f0f5fb;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 3px 10px 3px 20px;
 }
 
-.stat h4{
-    margin-bottom: 5px;
+.stat h4 {
+  margin-bottom: 5px;
 }
 
-.summary{
-    background: #012263;
-    color: white;
+.summary {
+  background: #012263;
+  color: white;
 }
 
-.card{
-    width: 220px;
-    height: 150px;
-    background: #F0F5FB;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 0 10px 10px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.card {
+  width: 220px;
+  height: 150px;
+  background: #f0f5fb;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 0 10px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.read{
-    background: green;
-    color: white;
-    padding: 3px 10px;
-    width: 50px;
-    align-self: flex-end;
-    border-radius: 4px;
-    cursor: pointer;
+.read {
+  background: green;
+  color: white;
+  padding: 3px 10px;
+  width: 50px;
+  align-self: flex-end;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.unread{
-    background: red;
-    color: white;
-    padding: 3px 10px;
-    width: 70px;
-    align-self: flex-end;
-    border-radius: 4px;
-    cursor: pointer;
+.unread {
+  background: red;
+  color: white;
+  padding: 3px 10px;
+  width: 70px;
+  align-self: flex-end;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.delete{
-    width: 60px;
-    background: rgb(112, 3, 3);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 12px;
-    padding: 2px;
-    cursor: pointer;
+.delete {
+  width: 60px;
+  background: rgb(112, 3, 3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 2px;
+  cursor: pointer;
 }
 
-.delete:hover{
-    background: rgb(175, 5, 5); 
+.delete:hover {
+  background: rgb(175, 5, 5);
 }
 
-.modal-container{
-    width: 300px;
-    height: 300px;
-    background: white;
-    border-radius: 12px;
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    justify-content: center;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
+.modal-container {
+  width: 300px;
+  height: 300px;
+  background: white;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
-input[type="text"], input[type="number"]{
-    display: block;
-    width: 90%;
-    padding: 5px 15px;
-    margin: 20px 10px;
+input[type="text"],
+input[type="number"] {
+  display: block;
+  width: 90%;
+  padding: 5px 15px;
+  margin: 20px 10px;
+}
+
+input:invalid:required{
+    border:1px solid red;
+}
+
+input:focus {
+  outline:#012263;
 }
 
 label {
-    margin: 20px 10px;
+  margin: 20px 10px;
 }
 
-form input[type="submit"]{
-    padding: 10px 25px;
-    margin: 20px auto;
-    cursor: pointer;
-    display: block;
-    background: #012263;
-    color: white;
-    border: none;
-    border-radius: 4px;
+form input[type="submit"] {
+  padding: 10px 25px;
+  margin: 20px auto;
+  cursor: pointer;
+  display: block;
+  background: #012263;
+  color: white;
+  border: none;
+  border-radius: 4px;
 }
 
-.close{
-    cursor: pointer;
-    position: absolute;
-    right: 5%;
-    top: 2%;
-    font-weight: 700;
-    color: #012263;
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 2%;
+  font-weight: 700;
+  color: #012263;
 }
 
-@media only screen and (max-width: 420px ) {
-   .search {
-       display: none;
-   }
+@media only screen and (max-width: 420px) {
+  .search {
+    display: none;
+  }
 
-   .heading{
+  .heading {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 }
 
-}
+@media only screen and (max-width: 588px) {
+  .card {
+    width: 180px;
+    height: 160px;
+  }
 
-@media only screen and (max-width: 588px){
-    .card{
-        width: 180px;
-        height: 160px;
-    }
-
-    #bookCards {
-        justify-content: center;
-    }
+  #bookCards {
+    justify-content: center;
+  }
 }

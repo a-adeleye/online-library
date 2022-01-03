@@ -202,17 +202,32 @@ function filterRead() {
   }
 }
 
-function toggleStats(){
-  if(myLibrary.length > 0){
+function toggleStats() {
+  if (myLibrary.length > 0) {
     statsRow.style.display = "flex";
     noBooks.style.display = "none";
   } else {
     statsRow.style.display = "none";
-  noBooks.style.display = "flex";
+    noBooks.style.display = "flex";
+  }
 }
+
+function validateForm() {
+  if (
+    $title.checkValidity() &&
+    $author.checkValidity() &&
+    $pages.checkValidity()
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  $pages.addEventListener("input", () => {
+    if (!$pages.checkValidity()) $pages.value = "";
+  });
 
   addBookBtn.addEventListener("click", addForm);
 
@@ -225,13 +240,17 @@ document.addEventListener("DOMContentLoaded", () => {
   unreadBookBtn.addEventListener("click", filterRead);
 
   submit.addEventListener("click", function () {
-    addBookToLibrary();
-    storeData();
-    updateBooks();
-    toggleStats();
-    closeModal();
-    updateStats();
-    clearForm();
+    if (validateForm()) {
+      addBookToLibrary();
+      storeData();
+      updateBooks();
+      toggleStats();
+      closeModal();
+      updateStats();
+      clearForm();
+    } else {
+      return;
+    }
   });
 
   if (!localStorage.getItem("myLibraryBook")) {
